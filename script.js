@@ -1,6 +1,6 @@
 //colocar data
 let date = new Date();
-let options = { weekday: "long", month: "short", day: "numeric" };
+let options = { weekday: "long", month: "long", day: "numeric" };
 let today = document.querySelector(".date");
 today.innerHTML = date.toLocaleDateString("pt-BR", options);
 
@@ -51,6 +51,7 @@ function ShowTasks() {
   list.innerHTML = newLiTag;
   //limpar o input após adicionar item
   input.value = "";
+  deleteAtMidnight();
 }
 
 //item concluido
@@ -67,4 +68,17 @@ function deleted(index) {
   todos.splice(index, 1);
   localStorage.setItem("New Todo", JSON.stringify(todos));
   ShowTasks();
+};
+
+//deletar itens depois de um dia
+function deleteAtMidnight() {
+  let day = new Date();
+  let midnight = day.getHours();
+
+  if(midnight === 00) {
+    let getLocalStorage = localStorage.getItem("New Todo");
+    todos = JSON.parse(getLocalStorage);
+    todos.splice(0);
+    localStorage.setItem("New Todo", JSON.stringify(todos));
+  }
 }
