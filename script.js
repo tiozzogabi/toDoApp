@@ -31,6 +31,21 @@ buttonAdd.addEventListener("click", () => {
   ShowTasks();
 });
 
+//deletar itens depois de um dia
+function deleteAtMidnight() {
+  let day = new Date();
+  let midnightHour = day.getHours();
+  let midnightMinutes = day.getMinutes();
+  console.log(midnightHour, midnightMinutes);
+
+  if(midnightHour === 00 || midnightMinutes === 59) {
+    let getLocalStorage = localStorage.getItem("New Todo");
+    todos = JSON.parse(getLocalStorage);
+    todos.splice(0);
+    localStorage.setItem("New Todo", JSON.stringify(todos));
+  }
+}
+
 function ShowTasks() {
   let getLocalStorage = localStorage.getItem("New Todo");
   if (getLocalStorage === null) {
@@ -68,17 +83,4 @@ function deleted(index) {
   todos.splice(index, 1);
   localStorage.setItem("New Todo", JSON.stringify(todos));
   ShowTasks();
-};
-
-//deletar itens depois de um dia
-function deleteAtMidnight() {
-  let day = new Date();
-  let midnight = day.getHours();
-
-  if(midnight === 00) {
-    let getLocalStorage = localStorage.getItem("New Todo");
-    todos = JSON.parse(getLocalStorage);
-    todos.splice(0);
-    localStorage.setItem("New Todo", JSON.stringify(todos));
-  }
 }
