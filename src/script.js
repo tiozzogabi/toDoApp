@@ -37,7 +37,7 @@ function deleteAtMidnight() {
   let midnightHour = day.getHours();
   let midnightMinutes = day.getMinutes();
 
-  if(midnightHour === 00 || midnightMinutes === 59) {
+  if (midnightHour === 00 || midnightMinutes === 59) {
     let getLocalStorage = localStorage.getItem("New Todo");
     todos = JSON.parse(getLocalStorage);
     todos.splice(0);
